@@ -7,7 +7,7 @@ const RegisterPage = () => {
   const [name,setName]=useState<string>('');
   const [password,setPassword]=useState<string>('');
   const [email,setEmail]=useState<string>('');
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password.length < 6) {
       setError('Password must be at least 6 characters long');
@@ -20,9 +20,30 @@ const RegisterPage = () => {
       setError('Password must contain at least one uppercase letter and one number');
       return;
     }
+
+    const userData = {
+      name,
+      password ,
+      email,
+      role:'user'
+    }
+    const res =await fetch('/api/register',{
+      method:"POST",
+        headers: {
+    'Content-Type': 'application/json', 
+  },
+      body:JSON.stringify(userData)
+    })
+    const data = await res.json()
+
+    if(!res.ok){
+      setError(data.error || "registration failed") 
+      return
+    }
+    
     setError(null);
     
-    console.log({ name, email, password });
+    alert("Registration Done")
   };
   return (
     <div  className="min-h-screen flex items-center justify-center bg-gray-900 text-white">

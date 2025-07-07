@@ -14,7 +14,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname()
   return (
-    <nav className="bg-gray-900 shadow-lg p-4 text-white">
+    <nav className="bg-gray-900 shadow-lg p-4 text-white fixed w-full" >
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="text-2xl font-bold text-blue-400">
