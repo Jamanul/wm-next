@@ -1,5 +1,5 @@
 'use client';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
@@ -8,14 +8,14 @@ const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
   { name: 'Products', path: '/products' },
-  { name: 'Login', path: '/login' },
+  
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname()
   const session =useSession();
-  console.log(session)
+  // console.log(session)
   return (
     <nav className="bg-gray-900 shadow-lg p-4 text-white fixed w-full" >
       <div className="container mx-auto flex items-center justify-between">
@@ -26,6 +26,9 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 font-medium">
+          <li>
+            {session.data?.user?.email}
+          </li>
           {navLinks.map((link) => (
             <li key={link.name}>
               <Link
@@ -35,7 +38,26 @@ const Navbar = () => {
                 {link.name}
               </Link>
             </li>
+            
           ))}
+            <li>
+    {session.status === "authenticated" ? (
+      <button
+        onClick={() => signOut()}
+        className="hover:text-red-500 transition-colors duration-300"
+      >
+        Logout
+      </button>
+    ) : (
+      <Link href='/login'>
+      <button
+        
+        className="hover:text-blue-400 transition-colors duration-300 cursor-pointer"
+      >
+        Login
+      </button></Link>
+    )}
+  </li>
         </ul>
 
         {/* Hamburger Menu Button */}

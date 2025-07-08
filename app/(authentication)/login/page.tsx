@@ -1,11 +1,13 @@
 'use client';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const LoginPage = () => {
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
+  const router =useRouter()
   const handleLogin =async (e:React.FormEvent<HTMLFormElement>) =>{
     e.preventDefault();
  const result = await signIn("credentials", {
@@ -14,11 +16,12 @@ const LoginPage = () => {
     password,
   });
 
-  if (result?.error) {
-    console.error("Sign in failed:", result.error);
-    
-  } else {
-    console.log("Signed in successfully");
+  
+  if(result?.ok){
+    router.push('/')
+  }
+  else{
+    alert(result?.error)
   }
   }
   return (
