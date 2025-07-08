@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./Components/Navbar/Navbar";
 
+import Provider from "./Components/providers/Provider";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,12 +25,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header>
+        <Provider>
+          <header>
           <Navbar/>
         </header>
         <main className="bg-gray-900 ">
@@ -37,6 +41,10 @@ export default function RootLayout({
           </div>
         </main>
         <footer></footer>
+       
+        </Provider>
+  
+      
       </body>
     </html>
   );

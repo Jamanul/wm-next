@@ -1,4 +1,5 @@
 'use client';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
@@ -13,6 +14,8 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname()
+  const session =useSession();
+  console.log(session)
   return (
     <nav className="bg-gray-900 shadow-lg p-4 text-white fixed w-full" >
       <div className="container mx-auto flex items-center justify-between">

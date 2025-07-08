@@ -1,17 +1,37 @@
 'use client';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 
 const LoginPage = () => {
+  const [email,setEmail]=useState<string>("")
+  const [password,setPassword]=useState<string>("")
+  const handleLogin =async (e:React.FormEvent<HTMLFormElement>) =>{
+    e.preventDefault();
+ const result = await signIn("credentials", {
+    redirect: false, 
+    email,
+    password,
+  });
+
+  if (result?.error) {
+    console.error("Sign in failed:", result.error);
+    
+  } else {
+    console.log("Signed in successfully");
+  }
+  }
   return (
     <div className="min-h-screen flex items-center justify-center text-white">
       <div className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold text-center">Login</h2>
-        <form className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block mb-1 text-sm">Email</label>
             <input
               type="email"
+              value={email}
+              onChange={e=>setEmail(e.target.value)}
               className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="you@example.com"
             />
@@ -20,6 +40,8 @@ const LoginPage = () => {
             <label className="block mb-1 text-sm">Password</label>
             <input
               type="password"
+              value={password}
+              onChange={e=>setPassword(e.target.value)}
               className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="••••••••"
             />
