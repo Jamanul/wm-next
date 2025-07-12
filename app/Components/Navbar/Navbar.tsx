@@ -7,8 +7,7 @@ import React, { useState } from 'react';
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'About', path: '/about' },
-  { name: 'Products', path: '/products' },
-  
+  { name: 'Products', path: '/products' }, 
 ];
 
 const Navbar = () => {
@@ -27,7 +26,12 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 font-medium">
           <li>
-            {session.data?.user?.email}
+            {session.data?.user?.email ? <Link
+                href={"/dashboard"}
+                className={`hover:text-blue-400 transition-colors duration-300 `}
+              >
+                Dashboard
+              </Link> : ''}
           </li>
           {navLinks.map((link) => (
             <li key={link.name}>

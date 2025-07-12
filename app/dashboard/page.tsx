@@ -7,7 +7,7 @@ import { authOptions } from "../lib/AuthOptions";
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
 
-  if (!session) redirect("/api/auth/signin");
+  if (!session) redirect("/login");
 
   const role = session.user.role;
 

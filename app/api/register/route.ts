@@ -1,7 +1,7 @@
 import { prisma } from "@/prisma/db_client";
 import { NextRequest, NextResponse } from "next/server";
 const bcrypt = require('bcrypt');
-// import bcrypt from "/bcrypt/js"
+// import bcrypt from "bcrypt/js"
 
 export async function POST(req: NextRequest) {
   const userData = await req.json();
