@@ -8,7 +8,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           <div className='col-span-3'>
             <Sidebar/>
           </div>
-            <div className='col-span-9'>
+            <div className='col-span-9 mt-[100px]'>
             {children}
             </div>
         </main>
