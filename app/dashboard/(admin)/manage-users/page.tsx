@@ -2,7 +2,8 @@
 import { authOptions } from "@/app/lib/AuthOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import UsersList from "./UsersList";
+import ShowUsers from "./ShowUsers";
+
 
 const ManageUsers = async () => {
   const session = await getServerSession(authOptions);
@@ -10,11 +11,6 @@ const ManageUsers = async () => {
   if (!session || session.user.role !== "admin") {
     redirect("/login");
   }
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/users`, {
-    cache: "no-store",
-  });
-  const  users  = await res.json();
 
 
 
@@ -34,11 +30,9 @@ const ManageUsers = async () => {
               <th className="py-3 px-4">Updated At</th>
             </tr>
           </thead>
-          <tbody>
-            {users?.map((user: any, index: number) => (
-             <UsersList key={user.id} user={user} index={index}/>
-            ))}
-          </tbody>
+         
+          <ShowUsers/>
+       
         </table>
       </div>
     </div>

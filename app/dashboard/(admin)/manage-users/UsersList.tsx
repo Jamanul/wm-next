@@ -10,8 +10,8 @@ export interface User {
   password: string;
   createdAt: Date;
   updatedAt: Date;
-
 }
+
 const UsersList = ({user,index}:{user:User,index:number}) => {
     const handleRoleChange = async(e:any)=>{
   e.preventDefault();
