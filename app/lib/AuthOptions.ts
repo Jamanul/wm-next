@@ -20,6 +20,10 @@ export const authOptions: NextAuthOptions = {
           where: { email: credentials.email },
         });
 
+        if(!user?.authenticated){
+            throw new Error("User is not authenticated");
+        }
+
         if (!user || !user.password) {
           throw new Error("User not found or missing password");
         }

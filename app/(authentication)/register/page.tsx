@@ -7,6 +7,7 @@ const RegisterPage = () => {
   const [name,setName]=useState<string>('');
   const [password,setPassword]=useState<string>('');
   const [email,setEmail]=useState<string>('');
+  const [approval,setApproval]=useState<boolean>(false);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password.length < 6) {
@@ -25,7 +26,8 @@ const RegisterPage = () => {
       name,
       password ,
       email,
-      role:'user'
+      role:'user',
+      authenticaed: false
     }
     const res =await fetch('/api/register',{
       method:"POST",
@@ -42,8 +44,9 @@ const RegisterPage = () => {
     }
     
     setError(null);
-    
+    setApproval(true)
     alert("Registration Done")
+
   };
   return (
     <div  className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
@@ -98,6 +101,9 @@ const RegisterPage = () => {
             Login
           </Link>
         </p>
+        {
+          approval && <p className='text-sm text-center text-gray-400'>A conformation email has been sent to your email address.</p>
+        }
       </div>
     </div>
   );

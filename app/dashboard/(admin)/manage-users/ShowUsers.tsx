@@ -13,7 +13,7 @@ export interface User {
   updatedAt: Date;
 }
 
-const ShowUsers: React.FC = () => {
+const ShowUsers = () => {
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)

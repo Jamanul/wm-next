@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `user` ADD COLUMN `authenticated` BOOLEAN NOT NULL DEFAULT false,
+    ADD COLUMN `totalEarning` DOUBLE NOT NULL DEFAULT 0,
+    ADD COLUMN `totalSpending` DOUBLE NOT NULL DEFAULT 0;
