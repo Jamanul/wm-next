@@ -25,7 +25,7 @@ const Sidebar = () => {
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="md:hidden p-4 text-gray-800 fixed top-0 left-0 z-50"
+        className="md:hidden p-4  fixed top-0 right-0 z-50 text-white"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -35,7 +35,7 @@ const Sidebar = () => {
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-4 z-40 transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 md:static md:h-screen`}
+        } md:translate-x-0 md:static md:h-full md:min-h-screen`}
       >
         <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
         <ul className="space-y-2">
